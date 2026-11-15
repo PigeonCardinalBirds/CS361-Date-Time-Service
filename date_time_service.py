@@ -16,14 +16,19 @@ def calculate_deadline():
         deadline = datetime.strptime(data["deadline"], "%Y-%m-%d").date()
 
         days_remaining = (deadline - date.today()).days
-        ####################################################################################
-        #### PLACEHOLDER: Determine if a deadline is upcoming, overdue, or today here ######
-        ####################################################################################
+
+        if days_remaining > 0:
+            status = "upcoming"
+        elif days_remaining < 0:
+            status = "overdue"
+        else:
+            status = "today"
    
 
         return jsonify({
             "deadline": deadline.isoformat(),
             "days_remaining": days_remaining,
+            "status": status,
         })
 
     except (ValueError, TypeError):
