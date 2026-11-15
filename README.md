@@ -95,21 +95,3 @@ In a separate terminal, run:
 python test_date_time.py
 ```
 
-## UML Sequence Diagram
-
-```mermaid
-sequenceDiagram
-    participant Client as Requesting Program
-    participant API as Date and Time Microservice
-
-    Client->>API: POST /calculate (deadline JSON)
-    API->>API: calculate_deadline()
-    API->>API: Validate deadline
-
-    alt Valid deadline
-        API->>API: Calculate days_remaining
-        API-->>Client: HTTP 200 (deadline, days_remaining)
-    else Invalid or missing deadline
-        API-->>Client: HTTP 400 (error message)
-    end
-```
